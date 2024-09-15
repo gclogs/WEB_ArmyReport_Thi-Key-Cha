@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
-import { UserActions } from '../../slice/UserSlice';
+import useHeader from '../base/hooks/useHeader';
+import { UserActions } from '../../app/slice/UserSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import db from '../../database/DB_Manager';
 import { collection, query, where, getDocs, doc, updateDoc } from "firebase/firestore";
@@ -16,7 +17,8 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 const Whereareyou = () => {
-  const uid = useSelector((state)=>state.User.uid);
+  const user = useHeader();
+  const uid = user.uid;
   console.log(uid);
   const dispatch = useDispatch();
   const locations = [
@@ -79,9 +81,6 @@ const Whereareyou = () => {
               ))}
             </Select>
           </FormControl>
-        </CardContent>
-        <CardContent>
-          <span>다들 어디 계신지..?</span>
         </CardContent>
         <CardActions>
           <Button size="small" onClick={onhandlelocation}>보고</Button>
